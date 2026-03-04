@@ -56,6 +56,14 @@
   background: rgba(198, 240, 71, 0.4);
 }
 
+.removeItem {
+  color: #c00;
+}
+
+.removeItem:hover {
+  background: rgba(200, 0, 0, 0.1);
+}
+
 .divider {
   padding: 2px 10px;
   font-family: var(--font-mono);

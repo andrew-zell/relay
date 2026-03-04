@@ -46,21 +46,21 @@ export function MainPanel() {
           <span className={styles.headerTitle}>
             {location?.name ?? ''} | {record.clientName}
           </span>
-          {record.date && (
-            <span className={styles.headerMeta}>
-              {record.date}
-              {record.startTime && ` · ${record.startTime}`}
-              {record.endTime && ` – ${record.endTime}`}
-            </span>
-          )}
-        </div>
-        <div className={styles.headerActions}>
-          <button
-            className={styles.editScheduleBtn}
-            onClick={() => setEditScheduleOpen(true)}
-          >
-            EDIT SCHEDULE
-          </button>
+          <div className={styles.headerMetaRow}>
+            {record.date && (
+              <span className={styles.headerMeta}>
+                {record.date}
+                {record.startTime && ` · ${record.startTime}`}
+                {record.endTime && ` – ${record.endTime}`}
+              </span>
+            )}
+            <button
+              className={styles.editScheduleBtn}
+              onClick={() => setEditScheduleOpen(true)}
+            >
+              EDIT SCHEDULE
+            </button>
+          </div>
         </div>
       </div>
 

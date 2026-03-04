@@ -7,6 +7,7 @@ interface HamburgerMenuProps {
   onSetInactive: () => void;
   onDuplicate: () => void;
   onMakePlaylist: () => void;
+  onRemove: () => void;
   onClose: () => void;
 }
 
@@ -16,6 +17,7 @@ export function HamburgerMenu({
   onSetInactive,
   onDuplicate,
   onMakePlaylist,
+  onRemove,
   onClose,
 }: HamburgerMenuProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -56,6 +58,10 @@ export function HamburgerMenu({
         <div className={styles.divider}>--------------</div>
         <button className={styles.menuItem} onClick={() => { onDuplicate(); onClose(); }}>
           DUPLICATE
+        </button>
+        <div className={styles.divider}>--------------</div>
+        <button className={`${styles.menuItem} ${styles.removeItem}`} onClick={() => { onRemove(); onClose(); }}>
+          REMOVE
         </button>
       </div>
     </div>

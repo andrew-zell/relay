@@ -11,7 +11,6 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   padding: 0 20px;
   min-height: 60px;
@@ -43,27 +42,29 @@
   letter-spacing: 0.02em;
 }
 
-.headerActions {
+.headerMetaRow {
   display: flex;
+  align-items: center;
   gap: 10px;
-  flex-shrink: 0;
 }
 
 .editScheduleBtn {
-  background: var(--accent);
-  color: var(--dark);
+  background: transparent;
+  color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
-  border: none;
-  padding: 0 14px;
-  height: 32px;
+  border: 1px solid var(--accent);
+  padding: 0 8px;
+  height: 22px;
   cursor: pointer;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
 }
 
 .editScheduleBtn:hover {
-  background: var(--accent-hover);
+  background: var(--accent);
+  color: var(--dark);
 }
 
 /* Sub-header */

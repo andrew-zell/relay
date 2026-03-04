@@ -14,6 +14,7 @@ interface ElementHolderProps {
 
 export function ElementHolder({ element }: ElementHolderProps) {
   const updateElement = useRelayStore((s) => s.updateElement);
+  const removeElement = useRelayStore((s) => s.removeElement);
   const setElementActive = useRelayStore((s) => s.setElementActive);
   const duplicateElement = useRelayStore((s) => s.duplicateElement);
   const enterPlaylistMode = useRelayStore((s) => s.enterPlaylistMode);
@@ -97,6 +98,7 @@ export function ElementHolder({ element }: ElementHolderProps) {
               onSetInactive={() => setElementActive(element.id, false)}
               onDuplicate={() => duplicateElement(element.id)}
               onMakePlaylist={handleMakePlaylist}
+              onRemove={() => removeElement(element.id)}
               onClose={() => setMenuOpen(false)}
             />
           )}
