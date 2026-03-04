@@ -4,16 +4,12 @@ import type { RelayRecord } from '../../types';
 import { ModalBase } from './ModalBase';
 import { DateInput } from '../shared/DateInput';
 import styles from './FormModal.module.css';
+import { TIMES } from '../../utils/times';
 
 interface EditScheduleModalProps {
   record: RelayRecord;
   onClose: () => void;
 }
-
-const TIMES = [
-  '6:00 AM','7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM',
-  '1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM',
-];
 
 export function EditScheduleModal({ record, onClose }: EditScheduleModalProps) {
   const updateRecord = useRelayStore((s) => s.updateRecord);
@@ -46,9 +42,17 @@ export function EditScheduleModal({ record, onClose }: EditScheduleModalProps) {
           <div className={styles.fieldWithAddon}>
             <label className={styles.label}>START TIME</label>
             <div className={styles.selectWrap}>
-              <select value={startTime} onChange={(e) => setStartTime(e.target.value)}>
+              <select
+                value={startTime}
+                onChange={(e) => {
+                  setStartTime(e.target.value);
+                  if (endTime && TIMES.indexOf(endTime) <= TIMES.indexOf(e.target.value)) {
+                    setEndTime('');
+                  }
+                }}
+              >
                 <option value="">--</option>
-                {TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
+                {TIMES.slice(0, -1).map((t) => <option key={t} value={t}>{t}</option>)}
               </select>
               <span className={styles.selectArrow}>▼</span>
             </div>
@@ -58,7 +62,11 @@ export function EditScheduleModal({ record, onClose }: EditScheduleModalProps) {
             <div className={styles.selectWrap}>
               <select value={endTime} onChange={(e) => setEndTime(e.target.value)}>
                 <option value="">--</option>
-                {TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
+                {TIMES.map((t, i) => (
+                  <option key={t} value={t} disabled={startTime ? i <= TIMES.indexOf(startTime) : false}>
+                    {t}
+                  </option>
+                ))}
               </select>
               <span className={styles.selectArrow}>▼</span>
             </div>

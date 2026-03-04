@@ -4,15 +4,11 @@ import { ModalBase } from './ModalBase';
 import { DateInput } from '../shared/DateInput';
 import styles from './FormModal.module.css';
 import tabStyles from './ScheduleRecordModal.module.css';
+import { TIMES } from '../../utils/times';
 
 interface ScheduleRecordModalProps {
   onClose: () => void;
 }
-
-const TIMES = [
-  '6:00 AM','7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM',
-  '1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM',
-];
 
 export function ScheduleRecordModal({ onClose }: ScheduleRecordModalProps) {
   const records = useRelayStore((s) => s.records);
@@ -116,9 +112,17 @@ export function ScheduleRecordModal({ onClose }: ScheduleRecordModalProps) {
             <div className={styles.fieldWithAddon}>
               <label className={styles.label}>START TIME</label>
               <div className={styles.selectWrap}>
-                <select value={existingStart} onChange={(e) => setExistingStart(e.target.value)}>
+                <select
+                  value={existingStart}
+                  onChange={(e) => {
+                    setExistingStart(e.target.value);
+                    if (existingEnd && TIMES.indexOf(existingEnd) <= TIMES.indexOf(e.target.value)) {
+                      setExistingEnd('');
+                    }
+                  }}
+                >
                   <option value="">--</option>
-                  {TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
+                  {TIMES.slice(0, -1).map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
                 <span className={styles.selectArrow}>▼</span>
               </div>
@@ -128,7 +132,11 @@ export function ScheduleRecordModal({ onClose }: ScheduleRecordModalProps) {
               <div className={styles.selectWrap}>
                 <select value={existingEnd} onChange={(e) => setExistingEnd(e.target.value)}>
                   <option value="">--</option>
-                  {TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
+                  {TIMES.map((t, i) => (
+                    <option key={t} value={t} disabled={existingStart ? i <= TIMES.indexOf(existingStart) : false}>
+                      {t}
+                    </option>
+                  ))}
                 </select>
                 <span className={styles.selectArrow}>▼</span>
               </div>
@@ -189,9 +197,17 @@ export function ScheduleRecordModal({ onClose }: ScheduleRecordModalProps) {
             <div className={styles.fieldWithAddon}>
               <label className={styles.label}>START</label>
               <div className={styles.selectWrap}>
-                <select value={newStart} onChange={(e) => setNewStart(e.target.value)}>
+                <select
+                  value={newStart}
+                  onChange={(e) => {
+                    setNewStart(e.target.value);
+                    if (newEnd && TIMES.indexOf(newEnd) <= TIMES.indexOf(e.target.value)) {
+                      setNewEnd('');
+                    }
+                  }}
+                >
                   <option value="">--</option>
-                  {TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
+                  {TIMES.slice(0, -1).map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
                 <span className={styles.selectArrow}>▼</span>
               </div>
@@ -201,7 +217,11 @@ export function ScheduleRecordModal({ onClose }: ScheduleRecordModalProps) {
               <div className={styles.selectWrap}>
                 <select value={newEnd} onChange={(e) => setNewEnd(e.target.value)}>
                   <option value="">--</option>
-                  {TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
+                  {TIMES.map((t, i) => (
+                    <option key={t} value={t} disabled={newStart ? i <= TIMES.indexOf(newStart) : false}>
+                      {t}
+                    </option>
+                  ))}
                 </select>
                 <span className={styles.selectArrow}>▼</span>
               </div>

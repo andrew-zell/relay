@@ -19,6 +19,8 @@ interface RelayState {
   setActiveRecord: (recordId: string | null) => void;
   addRecord: (record: Omit<RelayRecord, 'id'>) => void;
   updateRecord: (id: string, updates: Partial<RelayRecord>) => void;
+  duplicateRecord: (id: string) => void;
+  copyRecordToLocation: (id: string, newLocationId: string) => void;
 
   // Actions — Elements
   addElement: (element: Omit<Element, 'id'>) => void;
@@ -198,6 +200,48 @@ export const useRelayStore = create<RelayState>((set) => ({
     set((s) => ({
       records: s.records.map((r) => (r.id === id ? { ...r, ...updates } : r)),
     })),
+
+  duplicateRecord: (id) =>
+    set((s) => {
+      const original = s.records.find((r) => r.id === id);
+      if (!original) return {};
+      const newId = uid();
+      const newRecord: RelayRecord = { ...original, id: newId };
+      const newElements: Element[] = s.elements
+        .filter((el) => el.recordId === id)
+        .map((el) => ({
+          ...el,
+          id: uid(),
+          recordId: newId,
+          isActive: false,
+          playlist: el.playlist.map((f) => ({ ...f, id: uid() })),
+        }));
+      return {
+        records: [...s.records, newRecord],
+        elements: [...s.elements, ...newElements],
+      };
+    }),
+
+  copyRecordToLocation: (id, newLocationId) =>
+    set((s) => {
+      const original = s.records.find((r) => r.id === id);
+      if (!original) return {};
+      const newId = uid();
+      const newRecord: RelayRecord = { ...original, id: newId, locationId: newLocationId, date: '', startTime: '', endTime: '' };
+      const newElements: Element[] = s.elements
+        .filter((el) => el.recordId === id)
+        .map((el) => ({
+          ...el,
+          id: uid(),
+          recordId: newId,
+          isActive: false,
+          playlist: el.playlist.map((f) => ({ ...f, id: uid() })),
+        }));
+      return {
+        records: [...s.records, newRecord],
+        elements: [...s.elements, ...newElements],
+      };
+    }),
 
   addElement: (element) =>
     set((s) => ({

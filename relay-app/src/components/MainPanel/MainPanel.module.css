@@ -11,6 +11,7 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
   padding: 0 20px;
   min-height: 60px;
@@ -24,6 +25,7 @@
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  flex: 1;
 }
 
 .headerTitle {
@@ -42,29 +44,138 @@
   letter-spacing: 0.02em;
 }
 
-.headerMetaRow {
+.headerActions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.editScheduleBtn {
+.headerBtn {
   background: transparent;
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 11px;
   text-transform: uppercase;
   border: 1px solid var(--accent);
-  padding: 0 8px;
-  height: 22px;
+  padding: 0 10px;
+  height: 28px;
   cursor: pointer;
   letter-spacing: 0.03em;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 
-.editScheduleBtn:hover {
+.headerBtn:hover,
+.headerBtnActive {
   background: var(--accent);
   color: var(--dark);
+}
+
+/* Copy To dropdown */
+.copyToWrap {
+  position: relative;
+}
+
+.copyToDropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--white);
+  border: var(--border);
+  box-shadow: 4px 4px 0 var(--dark);
+  min-width: 200px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.copyToItem {
+  display: block;
+  width: 100%;
+  padding: 9px 14px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.copyToItem:hover {
+  background: var(--lightest);
+}
+
+.copyToItemSelected {
+  background: color-mix(in srgb, var(--accent) 20%, var(--white));
+}
+
+.copyToEmpty {
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--mid);
+  text-transform: uppercase;
+}
+
+.copyToWarning {
+  border-top: var(--border);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: color-mix(in srgb, #ff9900 10%, var(--white));
+}
+
+.copyToWarningText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dark);
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.copyToWarningActions {
+  display: flex;
+  gap: 6px;
+}
+
+.copyToConfirmBtn {
+  flex: 1;
+  background: var(--accent);
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  border: none;
+  height: 28px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.copyToConfirmBtn:hover {
+  background: var(--accent-hover);
+}
+
+.copyToCancelBtn {
+  flex: 1;
+  background: transparent;
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  border: var(--border);
+  height: 28px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.copyToCancelBtn:hover {
+  background: var(--mid);
 }
 
 /* Sub-header */
