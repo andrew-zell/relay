@@ -1,0 +1,79 @@
+@import './tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--white);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--dark);
+  text-transform: uppercase;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: none;
+  letter-spacing: 0.02em;
+}
+
+input, select {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: var(--white);
+  border: var(--border);
+  outline: none;
+  padding: 0 10px;
+  height: 40px;
+  width: 100%;
+  appearance: none;
+  border-radius: 0;
+}
+
+input::placeholder {
+  color: var(--mid);
+  text-transform: uppercase;
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--mid);
+}
+
+/* Utility classes */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,150 @@
+.library {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.locationGroup {
+  border-bottom: var(--border);
+}
+
+.locationRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 14px;
+  height: 36px;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--dark);
+  letter-spacing: 0.03em;
+}
+
+.locationRow:hover {
+  background: var(--accent-hover);
+}
+
+.locationName {
+  flex: 1;
+  text-align: left;
+}
+
+.chevron {
+  font-size: 11px;
+  transition: transform 0.15s ease;
+  display: inline-block;
+}
+
+.chevronUp {
+  transform: rotate(180deg);
+}
+
+.recordList {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  border-top: 1px solid var(--dark);
+}
+
+.recordGroup {
+  border-bottom: 1px dashed var(--dark);
+}
+
+.recordGroup:last-child {
+  border-bottom: none;
+}
+
+.recordRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0 14px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-align: left;
+}
+
+.recordRow:hover {
+  background: rgba(198, 240, 71, 0.2);
+}
+
+.recordRowActive {
+  font-weight: 600;
+}
+
+.recordToggle {
+  font-size: 15px;
+  width: 14px;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.recordName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dateList {
+  padding: 4px 0;
+}
+
+.dateRow,
+.noDate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 14px 4px 28px;
+  min-height: 28px;
+  border-bottom: 1px dashed var(--mid);
+}
+
+.dateRow:last-child,
+.noDate:last-child {
+  border-bottom: none;
+}
+
+.dateText {
+  font-size: 12px;
+  color: var(--dark);
+}
+
+.noDate {
+  font-size: 11px;
+  color: #888;
+}
+
+.elementsBtn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.elementsBtn:hover {
+  text-decoration: underline;
+}
+
+.elementsBtnActive {
+  font-weight: 700;
+  color: var(--dark);
+}

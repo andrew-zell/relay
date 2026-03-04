@@ -1,0 +1,179 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.fieldWithAddon {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 120px;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--dark);
+  letter-spacing: 0.03em;
+}
+
+.selectWrap {
+  position: relative;
+  display: flex;
+}
+
+.selectWrap select {
+  flex: 1;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.selectArrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  background: var(--accent);
+  border: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  pointer-events: none;
+  color: var(--dark);
+}
+
+.divider {
+  height: 1px;
+  background: var(--mid);
+  margin: 4px 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.confirmBtn {
+  background: var(--accent);
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  border: none;
+  padding: 0 28px;
+  height: 36px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.confirmBtn:hover {
+  background: var(--accent-hover);
+}
+
+/* Drop zone for file upload */
+.dropZone {
+  border: 2px dashed var(--dark);
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: var(--lightest);
+  transition: background 0.1s;
+  position: relative;
+}
+
+.dropZone:hover {
+  background: var(--mid);
+}
+
+.dropZoneActive {
+  background: color-mix(in srgb, var(--accent) 20%, var(--white));
+  border-color: var(--accent);
+}
+
+.dropZoneContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.dropZoneIcon {
+  font-size: 24px;
+  color: var(--dark);
+}
+
+.dropZoneText {
+  font-size: 12px;
+  color: var(--dark);
+  letter-spacing: 0.03em;
+}
+
+.browseBtn {
+  background: var(--accent);
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  border: none;
+  padding: 0 16px;
+  height: 32px;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.browseBtn:hover {
+  background: var(--accent-hover);
+}
+
+.filePreviewRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: var(--lightest);
+  border: var(--border);
+  font-size: 12px;
+}
+
+.filePreviewName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.removeFileBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--dark);
+  flex-shrink: 0;
+}
+
+.removeFileBtn:hover {
+  color: red;
+}

@@ -1,0 +1,93 @@
+.picker {
+  background: var(--white);
+  border: var(--border);
+  width: 280px;
+  box-shadow: 4px 4px 0 var(--dark);
+  font-family: var(--font-mono);
+  user-select: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--dark);
+  padding: 8px 10px;
+}
+
+.navBtn {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.navBtn:hover {
+  color: var(--white);
+}
+
+.monthLabel {
+  font-size: 12px;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+
+.dayHeader {
+  font-size: 10px;
+  color: var(--mid);
+  text-align: center;
+  padding: 6px 2px 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--mid);
+}
+
+.cell {
+  font-size: 12px;
+  text-align: center;
+  padding: 6px 2px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  color: var(--dark);
+  line-height: 1;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell:hover {
+  background: var(--lightest);
+}
+
+.outside {
+  color: var(--mid);
+}
+
+.outside:hover {
+  background: var(--lightest);
+}
+
+.selected {
+  background: var(--accent) !important;
+  color: var(--dark) !important;
+  font-weight: 700;
+}
+
+.today {
+  outline: 2px solid var(--dark);
+  outline-offset: -2px;
+}

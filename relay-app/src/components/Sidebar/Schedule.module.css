@@ -1,0 +1,156 @@
+.schedule {
+  display: flex;
+  flex-direction: column;
+  border-top: var(--border);
+  flex-shrink: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  height: 36px;
+  background: var(--dark);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.addBtn {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addBtn:hover {
+  color: var(--white);
+}
+
+.eventList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 240px;
+}
+
+.eventRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-bottom: 1px dashed var(--mid);
+  min-height: 34px;
+}
+
+.eventRow:last-child {
+  border-bottom: none;
+}
+
+.eventDate {
+  font-size: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--dark);
+  font-family: var(--font-mono);
+}
+
+.eventClient {
+  flex: 1;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--dark);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.locationBadge {
+  background: var(--accent);
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  border: none;
+  padding: 3px 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.locationBadge:hover {
+  background: var(--accent-hover);
+}
+
+.empty {
+  padding: 12px 14px;
+  font-size: 11px;
+  color: var(--mid);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+/* Past events section */
+.pastSection {
+  border-top: 1px dashed var(--mid);
+}
+
+.pastToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 14px;
+  height: 30px;
+  background: var(--lightest);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #888;
+  letter-spacing: 0.04em;
+}
+
+.pastToggle:hover {
+  background: var(--mid);
+  color: var(--dark);
+}
+
+.chevron {
+  font-size: 9px;
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.chevronUp {
+  transform: rotate(180deg);
+}
+
+.pastList {
+  background: var(--lightest);
+}
+
+.pastList .eventRow {
+  opacity: 0.6;
+}
+
+.pastList .locationBadge {
+  background: var(--mid);
+}
+
+.pastList .locationBadge:hover {
+  background: #bbb;
+}

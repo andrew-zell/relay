@@ -1,0 +1,35 @@
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+.inputRow {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.inputRow input {
+  flex: 1;
+  min-width: 0;
+}
+
+.calBtn {
+  flex-shrink: 0;
+  background: var(--dark);
+  color: var(--accent);
+  border: var(--border);
+  border-left: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 10px;
+  font-family: var(--font-mono);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calBtn:hover {
+  background: #444;
+}

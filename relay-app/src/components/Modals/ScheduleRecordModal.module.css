@@ -1,0 +1,32 @@
+.tabs {
+  display: flex;
+  border-bottom: var(--border);
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  height: 36px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--lightest);
+  border: none;
+  border-right: var(--border);
+  cursor: pointer;
+  color: var(--dark);
+}
+
+.tab:last-child {
+  border-right: none;
+}
+
+.tab:hover {
+  background: var(--mid);
+}
+
+.tabActive {
+  background: var(--accent);
+  font-weight: 600;
+}

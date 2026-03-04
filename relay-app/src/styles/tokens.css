@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+
+:root {
+  --accent: #C6F047;
+  --accent-hover: #d8f56e;
+  --accent-light: #e8f9b5;
+  --dark: #2C2C2C;
+  --lightest: #F2F2F2;
+  --mid: #D9D9D9;
+  --white: #FFFFFF;
+
+  --border: 2px solid var(--dark);
+  --border-width: 2px;
+
+  --font-mono: 'Oxygen Mono', 'Courier New', monospace;
+
+  --sidebar-width: 22%;
+  --sidebar-min-width: 260px;
+  --topbar-height: 60px;
+}

@@ -1,0 +1,47 @@
+.toggle {
+  position: relative;
+  display: inline-flex;
+  width: 48px;
+  height: 24px;
+  background: var(--dark);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.toggle:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.thumb {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  border: 1px solid var(--dark);
+  transition: left 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumb::after {
+  content: '✓';
+  font-size: 11px;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.off .thumb {
+  left: 0;
+  background: var(--mid);
+  color: var(--dark);
+}
+
+.on .thumb {
+  left: 50%;
+  background: var(--accent);
+  color: var(--dark);
+}

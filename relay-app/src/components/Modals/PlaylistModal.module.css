@@ -1,0 +1,173 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.hint {
+  font-size: 11px;
+  color: #666;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+.empty {
+  padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--mid);
+  border: 1px dashed var(--mid);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: var(--lightest);
+  border: var(--border);
+}
+
+.index {
+  font-size: 12px;
+  color: var(--mid);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.thumb {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--mid);
+}
+
+.videoThumb {
+  width: 36px;
+  height: 36px;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.fileName {
+  flex: 1;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--dark);
+}
+
+.fileType {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  color: var(--mid);
+  flex-shrink: 0;
+}
+
+.removeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--dark);
+  flex-shrink: 0;
+  padding: 2px;
+}
+
+.removeBtn:hover {
+  color: #c00;
+}
+
+.reorderBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.reorderBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  color: var(--dark);
+  padding: 1px 3px;
+  line-height: 1;
+  font-family: var(--font-mono);
+}
+
+.reorderBtn:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.reorderBtn:disabled {
+  color: var(--mid);
+  cursor: default;
+}
+
+.addRow {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.exitRow {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.exitBtn {
+  background: transparent;
+  border: 2px solid var(--dark);
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 0 20px;
+  height: 36px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.exitBtn:hover {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.addBtn {
+  background: var(--accent);
+  color: var(--dark);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  border: none;
+  padding: 0 24px;
+  height: 36px;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.addBtn:hover {
+  background: var(--accent-hover);
+}
