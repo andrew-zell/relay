@@ -1,10 +1,11 @@
 import { create } from 'zustand';
-import type { Element, Location, PlaylistFile, RelayRecord } from '../types';
+import type { Element, Location, Participant, PlaylistFile, RelayRecord } from '../types';
 
 interface RelayState {
   locations: Location[];
   records: RelayRecord[];
   elements: Element[];
+  participants: Participant[];
 
   // UI state
   expandedLocations: Set<string>;
@@ -21,6 +22,11 @@ interface RelayState {
   updateRecord: (id: string, updates: Partial<RelayRecord>) => void;
   duplicateRecord: (id: string) => void;
   copyRecordToLocation: (id: string, newLocationId: string) => void;
+
+  // Actions — Participants
+  addParticipant: (participant: Omit<Participant, 'id'>) => void;
+  updateParticipant: (id: string, updates: Partial<Omit<Participant, 'id' | 'recordId'>>) => void;
+  removeParticipant: (id: string) => void;
 
   // Actions — Elements
   addElement: (element: Omit<Element, 'id'>) => void;
@@ -171,6 +177,7 @@ export const useRelayStore = create<RelayState>((set) => ({
   locations: SEED_LOCATIONS,
   records: SEED_RECORDS,
   elements: SEED_ELEMENTS,
+  participants: [],
   expandedLocations: new Set(['loc-sj']),
   expandedRecords: new Set(['rec-avant']),
   activeRecordId: 'rec-avant',
@@ -242,6 +249,19 @@ export const useRelayStore = create<RelayState>((set) => ({
         elements: [...s.elements, ...newElements],
       };
     }),
+
+  addParticipant: (participant) =>
+    set((s) => ({
+      participants: [...s.participants, { ...participant, id: uid() }],
+    })),
+
+  updateParticipant: (id, updates) =>
+    set((s) => ({
+      participants: s.participants.map((p) => (p.id === id ? { ...p, ...updates } : p)),
+    })),
+
+  removeParticipant: (id) =>
+    set((s) => ({ participants: s.participants.filter((p) => p.id !== id) })),
 
   addElement: (element) =>
     set((s) => ({

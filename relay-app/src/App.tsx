@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { MainPanel } from './components/MainPanel/MainPanel';
+import { BriefingPanel } from './components/BriefingPanel/BriefingPanel';
 import { NewRecordModal } from './components/Modals/NewRecordModal';
 import relayLogo from './assets/RelayLogo.svg';
 import styles from './App.module.css';
 
+type AppView = 'main' | 'briefing';
+
 function App() {
   const [newRecordOpen, setNewRecordOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<AppView>('main');
 
   return (
     <div className={styles.app}>
@@ -17,18 +21,32 @@ function App() {
         </div>
         <div className={styles.topbarRight}>
           <button
-            className={styles.newRecordBtn}
-            onClick={() => setNewRecordOpen(true)}
+            className={`${styles.navBtn} ${currentView === 'briefing' ? styles.navBtnActive : ''}`}
+            onClick={() => setCurrentView(currentView === 'briefing' ? 'main' : 'briefing')}
           >
-            + NEW RECORD
+            BRIEFING
           </button>
+          {currentView === 'main' && (
+            <button
+              className={styles.newRecordBtn}
+              onClick={() => setNewRecordOpen(true)}
+            >
+              + NEW RECORD
+            </button>
+          )}
         </div>
       </header>
 
       {/* Body */}
       <div className={styles.body}>
-        <Sidebar />
-        <MainPanel />
+        {currentView === 'briefing' ? (
+          <BriefingPanel />
+        ) : (
+          <>
+            <Sidebar />
+            <MainPanel />
+          </>
+        )}
       </div>
 
       {newRecordOpen && (

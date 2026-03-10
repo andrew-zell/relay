@@ -43,6 +43,15 @@ export interface PlaylistFile {
   isVideo: boolean;
 }
 
+export interface Participant {
+  id: string;
+  recordId: string;
+  name: string;
+  email: string;
+  position: string;
+  company: string;
+}
+
 export interface Element {
   id: string;
   recordId: string;

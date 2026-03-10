@@ -24,6 +24,7 @@ function isUpcoming(dateStr: string): boolean {
 export function Schedule() {
   const records = useRelayStore((s) => s.records);
   const locations = useRelayStore((s) => s.locations);
+  const participants = useRelayStore((s) => s.participants);
   const setActiveRecord = useRelayStore((s) => s.setActiveRecord);
 
   const [showModal, setShowModal] = useState(false);
@@ -54,10 +55,12 @@ export function Schedule() {
     const location = locations.find((l) => l.id === record.locationId);
     const [sendState, setSendState] = useState<'idle' | 'loading' | 'sent' | 'error'>('idle');
 
+    const recordParticipants = participants.filter((p) => p.recordId === record.id);
+
     async function handleSendToSentimento() {
       setSendState('loading');
       try {
-        await sendRecordToSentimento(record);
+        await sendRecordToSentimento(record, recordParticipants);
         setSendState('sent');
       } catch {
         setSendState('error');
