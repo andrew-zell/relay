@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRelayStore } from '../../store/useRelayStore';
 import { ScheduleRecordModal } from '../Modals/ScheduleRecordModal';
+import { sendRecordToSentimento } from '../../utils/sentimento';
 import styles from './Schedule.module.css';
 
 /** Parse MM/DD/YY into a comparable Date (assumes 20xx) */
@@ -49,12 +50,44 @@ export function Schedule() {
       return db.getTime() - da.getTime(); // most recent past first
     });
 
-  function EventRow({ record }: { record: typeof records[0] }) {
+  function EventRow({ record, showSentimento = false }: { record: typeof records[0]; showSentimento?: boolean }) {
     const location = locations.find((l) => l.id === record.locationId);
+    const [sendState, setSendState] = useState<'idle' | 'loading' | 'sent' | 'error'>('idle');
+
+    async function handleSendToSentimento() {
+      setSendState('loading');
+      try {
+        await sendRecordToSentimento(record);
+        setSendState('sent');
+      } catch {
+        setSendState('error');
+      }
+    }
+
     return (
       <div className={styles.eventRow}>
         <span className={styles.eventDate}>{record.date}</span>
         <span className={styles.eventClient}>{record.clientName}</span>
+        {showSentimento && (
+          <button
+            className={`${styles.sentimentoBtn} ${
+              sendState === 'sent' ? styles.sentimentoBtnSent :
+              sendState === 'error' ? styles.sentimentoBtnError : ''
+            }`}
+            onClick={handleSendToSentimento}
+            disabled={sendState === 'loading' || sendState === 'sent'}
+            title={
+              sendState === 'sent' ? 'Sent to Sentimento' :
+              sendState === 'error' ? 'Failed — click to retry' :
+              'Send to Sentimento'
+            }
+          >
+            {sendState === 'loading' ? '...' :
+             sendState === 'sent' ? '✓' :
+             sendState === 'error' ? '!' :
+             '→S'}
+          </button>
+        )}
         <button
           className={styles.locationBadge}
           onClick={() => setActiveRecord(record.id)}
@@ -94,7 +127,7 @@ export function Schedule() {
 
             {pastExpanded && (
               <div className={styles.pastList}>
-                {past.map((r) => <EventRow key={r.id} record={r} />)}
+                {past.map((r) => <EventRow key={r.id} record={r} showSentimento />)}
               </div>
             )}
           </div>
