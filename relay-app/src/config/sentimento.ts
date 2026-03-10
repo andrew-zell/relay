@@ -1,13 +1,14 @@
 // Sentimento integration config
-// VITE_SENTIMENTO_URL should be set in .env.local for dev and as a Fly secret for production
+// Override with VITE_SENTIMENTO_URL in .env.local for local dev pointing at localhost
 export const SENTIMENTO_URL =
-  (import.meta.env.VITE_SENTIMENTO_URL as string | undefined) ?? 'http://localhost:3001';
+  (import.meta.env.VITE_SENTIMENTO_URL as string | undefined) ?? 'https://sentimento-app.fly.dev';
 
-// Maps Relay locationId → Sentimento BriefingCenter integer ID
-// Confirm IDs against Sentimento's seeded DB before deploying
+// Relay locationId → Sentimento BriefingCenter integer ID
+// Verified against https://sentimento-app.fly.dev/api/briefing-centers
+// SJ=1, LD=2, TK=3, SG=4
 export const LOCATION_TO_BRIEFING_CENTER: Record<string, number> = {
-  'loc-sj': 1,
-  'loc-ld': 2,
-  'loc-tk': 3,
-  'loc-sg': 4,
+  'loc-sj': 1, // San Jose
+  'loc-ld': 2, // London
+  'loc-tk': 3, // Tokyo
+  'loc-sg': 4, // Singapore
 };
