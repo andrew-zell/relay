@@ -46,8 +46,8 @@ if (process.env.NODE_ENV === 'production') {
     maxAge: '1y',
     immutable: true,
   }));
-  // SPA fallback
-  app.get('*', (_req, res) => {
+  // SPA fallback (Express 5 requires named wildcard)
+  app.get('/*splat', (_req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });
 }
