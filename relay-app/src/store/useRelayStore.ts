@@ -28,6 +28,9 @@ interface RelayState {
   updateParticipant: (id: string, updates: Partial<Omit<Participant, 'id' | 'recordId'>>) => void;
   removeParticipant: (id: string) => void;
 
+  // Actions — Janus hydration
+  hydrateJanusBriefings: (data: { records: RelayRecord[]; participants: Participant[] }) => void;
+
   // Actions — Elements
   addElement: (element: Omit<Element, 'id'>) => void;
   updateElement: (id: string, updates: Partial<Element>) => void;
@@ -262,6 +265,19 @@ export const useRelayStore = create<RelayState>((set) => ({
 
   removeParticipant: (id) =>
     set((s) => ({ participants: s.participants.filter((p) => p.id !== id) })),
+
+  hydrateJanusBriefings: ({ records: incomingRecords, participants: incomingParticipants }) =>
+    set((s) => {
+      const existingIds = new Set(s.records.map((r) => r.id));
+      const newRecords = incomingRecords.filter((r) => !existingIds.has(r.id));
+      if (newRecords.length === 0) return {};
+      const newRecordIds = new Set(newRecords.map((r) => r.id));
+      const newParticipants = incomingParticipants.filter((p) => newRecordIds.has(p.recordId));
+      return {
+        records: [...s.records, ...newRecords],
+        participants: [...s.participants, ...newParticipants],
+      };
+    }),
 
   addElement: (element) =>
     set((s) => ({

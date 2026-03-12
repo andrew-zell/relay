@@ -3,12 +3,15 @@ import { Sidebar } from './components/Sidebar/Sidebar';
 import { MainPanel } from './components/MainPanel/MainPanel';
 import { BriefingPanel } from './components/BriefingPanel/BriefingPanel';
 import { NewRecordModal } from './components/Modals/NewRecordModal';
+import { useJanusSync } from './hooks/useJanusSync';
 import relayLogo from './assets/RelayLogo.svg';
 import styles from './App.module.css';
 
 type AppView = 'main' | 'briefing';
 
 function App() {
+  useJanusSync();
+
   const [newRecordOpen, setNewRecordOpen] = useState(false);
   const [currentView, setCurrentView] = useState<AppView>('main');
 
