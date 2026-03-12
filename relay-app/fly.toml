@@ -2,6 +2,8 @@ app = "relay-app"
 primary_region = "sjc"
 
 [build]
+  [build.args]
+    VITE_RELAY_API_SECRET = "relay-read-v1"
 
 [http_service]
   internal_port = 8080

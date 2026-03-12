@@ -4,7 +4,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-# VITE_RELAY_API_SECRET must be passed as a build arg so Vite bakes it into the bundle
+# RELAY_READ_TOKEN is the read-side token baked into the frontend bundle at build time.
+# It is lower-sensitivity than JANUS_SECRET (prevents casual enumeration, not a high-value secret).
+# Set it in fly.toml [build.args] or pass via --build-arg on deploy.
 ARG VITE_RELAY_API_SECRET
 ENV VITE_RELAY_API_SECRET=$VITE_RELAY_API_SECRET
 RUN npm run build

@@ -6,14 +6,22 @@ const router = Router();
 
 // ─── Auth middleware ─────────────────────────────────────────────────────────
 
-function apiAuth(req: Request, res: Response, next: NextFunction): void {
+/** Guards Janus write endpoint — checks JANUS_SECRET */
+function writeAuth(req: Request, res: Response, next: NextFunction): void {
   const secret = process.env.JANUS_SECRET;
-  if (!secret) {
-    // Dev mode — no secret set, skip auth
-    next();
+  if (!secret) { next(); return; } // dev mode
+  if (req.headers['x-janus-secret'] !== secret) {
+    res.status(401).json({ error: 'Unauthorized' });
     return;
   }
-  if (req.headers['x-janus-secret'] !== secret) {
+  next();
+}
+
+/** Guards browser read endpoints — checks RELAY_READ_TOKEN */
+function readAuth(req: Request, res: Response, next: NextFunction): void {
+  const token = process.env.RELAY_READ_TOKEN;
+  if (!token) { next(); return; } // dev mode
+  if (req.headers['x-janus-secret'] !== token) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -22,7 +30,7 @@ function apiAuth(req: Request, res: Response, next: NextFunction): void {
 
 // ─── POST /relay/briefings ────────────────────────────────────────────────────
 
-router.post('/', apiAuth, (req: Request, res: Response): void => {
+router.post('/', writeAuth, (req: Request, res: Response): void => {
   const payload = req.body as JanusPayload;
 
   // Validate required fields
@@ -70,7 +78,7 @@ router.post('/', apiAuth, (req: Request, res: Response): void => {
 
 // ─── GET /relay/briefings ─────────────────────────────────────────────────────
 
-router.get('/', apiAuth, (_req: Request, res: Response): void => {
+router.get('/', readAuth, (_req: Request, res: Response): void => {
   const records = [];
   const participants = [];
 
@@ -84,7 +92,7 @@ router.get('/', apiAuth, (_req: Request, res: Response): void => {
 
 // ─── GET /relay/briefings/:id ─────────────────────────────────────────────────
 
-router.get('/:id', apiAuth, (req: Request, res: Response): void => {
+router.get('/:id', readAuth, (req: Request, res: Response): void => {
   const entry = briefingStore.get(req.params.id);
   if (!entry) {
     res.status(404).json({ error: `Briefing not found: ${req.params.id}` });
